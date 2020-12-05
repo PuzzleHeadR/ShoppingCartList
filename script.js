@@ -1,6 +1,15 @@
+// Kyin Edwards
+// Spring 2020
+// Web233 Javascript
+// 12/1/2020
+// Week 16
+
+
 //v3.4 Add popup describing app when visitors load webpage the first time
-window.onload = function() {
-    alert("Welcome to 'To-do List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n");
+window.onload = function() 
+{
+    alert("test line 2b");
+    about();
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
@@ -24,9 +33,8 @@ function get(name){
 //v4.1 ShareList via bitly api
 function passlist()
 {
- var url = "https://rvclist.github.io/index.html?list="+ shoppinglist;
+ var url = "https://rvclist.github.io/index.html?list="+ shoppinglist; // change .html
     var accessToken = "eff66075988ab2f610fba18455b493ce90540381";
-
     var params = {
         "long_url" : url           
     };
@@ -66,7 +74,7 @@ function copyToClipboard(text) {
 
 function about()
 {
-    alert("Welcome to 'To-do List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\n
+    alert("Welcome to 'To-do List' App! Enter the fields for each event or reminder you would like to add"\n); 
 }
 //read cookie and return
 function readCookie(name) {
@@ -119,7 +127,7 @@ function populateshoppinglistonload()
   shoppinglist = [];
   addtocart = [];
   //load cookie into array
-  var y = readCookie('konkollist');
+  var y = readCookie('todolist');
   //remove unwanted chars and format
   y = remove_unwanted(y); 
   //spit array by comma %2C
