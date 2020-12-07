@@ -1,4 +1,8 @@
-
+// Kyin Edwards
+// Spring 2020
+// Web233 Javascript
+// 12/1/2020
+// Week 16
   
 //v3.4 Add popup describing app when visitors load webpage the first time
 window.onload = function() {
@@ -26,7 +30,7 @@ function get(name){
 //ShareList passbyvalues Week 14
 function passlist()
 {
- var url = "https://rvclist.github.io/rvclist14/index.html?list="+ shoppinglist;
+ var url = "To-doListDirectTaskManager.github.io/index.html?list="+ shoppinglist;
  //Week 14 add link to sharelist id
       document.getElementById("sharelist").innerHTML = 'Share List:\n' + url;
  //Copy URL
