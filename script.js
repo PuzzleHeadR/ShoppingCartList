@@ -4,11 +4,10 @@
 // 12/1/2020
 // Week 16
 
-
 //v3.4 Add popup describing app when visitors load webpage the first time
 window.onload = function() 
 {
-    alert("test line 2b");
+    //alert("test line 2b");
     about();
     populateshoppinglistonload();
     displayShoppinglists();
