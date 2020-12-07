@@ -7,8 +7,7 @@
 //v3.4 Add popup describing app when visitors load webpage the first time
 window.onload = function() 
 {
-    //alert("test line 2b");
-    about();
+    about(); // describes what the app if used for
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
@@ -18,7 +17,8 @@ window.onload = function()
 //v 4.0 read cookie on load and display
 
 //v4.1 get values via URL
-function get(name){
+function get(name) // c
+{
     var url = window.location.search;
     var num = url.search(name);
     var namel = name.length;
@@ -30,9 +30,9 @@ function get(name){
     if(num<0)  return url;
 }
 //v4.1 ShareList via bitly api
-function passlist()
+function passlist() // c
 {
- var url = "https://rvclist.github.io/index.html?list="+ shoppinglist; // change .html
+ var url = "https://To-doListDirectTaskManager.github.io/index.html?list="+ shoppinglist; // change .html
     var accessToken = "eff66075988ab2f610fba18455b493ce90540381";
     var params = {
         "long_url" : url           
@@ -57,18 +57,26 @@ function passlist()
         //alert(data.link);
       document.getElementById("sharelist").innerHTML = 'Share List:\n' + url;
       //copyToClipboard("sharelist");
-      copyToClipboard(url);
+      copyToClipboard(URL);
       //alert("ShoppingList URL Copied");
     });
 }
 //vFinal share function
-function share()
+function share() // c
 {
    passlist();
 }
 //v4.1 prompt message to copy URL
-function copyToClipboard(text) {
-   window.prompt("Copy & Share List!", text);
+function copyToClipboard(text)
+{
+     var passbyurl = document.createElement("textarea");
+  passbyurl.value = text;
+  document.body.appendChild(passbyurl);
+  passbyurl.focus();
+  passbyurl.select();
+  document.execCommand("copy");
+  document.body.removeChild(passbyurl);
+  alert("URL is now on your clipboard.  Share with a friend: " + text);
 }
 
 function about()
@@ -88,7 +96,7 @@ function readCookie(name) {
 }
 
 //v. 4.0remove and format cookie
-function remove_unwanted(str) {  
+function remove_unwanted(str) {  // c
     
   if ((str===null) || (str===''))  
        return false;  
@@ -111,7 +119,7 @@ function savecookie()
    var date = new Date();
    //keeps for a year
     date.setTime(date.getTime() + Number(365) * 3600 * 1000);
-   document.cookie = 'konkollist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
+   document.cookie = 'PuzzleHeadR' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
 }
 
 
@@ -121,12 +129,12 @@ function delete_cookie(name) {
 }
 
 
-function populateshoppinglistonload()
+function populateshoppinglistonload() // c
 {
   shoppinglist = [];
   addtocart = [];
   //load cookie into array
-  var y = readCookie('todolist');
+  var y = readCookie('PuzzleHeadR');
   //remove unwanted chars and format
   y = remove_unwanted(y); 
   //spit array by comma %2C
@@ -155,7 +163,7 @@ var shoppinglist = [];
 var addtocart = [];
 
 //v3.1
-function changeShoppinglist(position) {
+function changeShoppinglist(position) { // c
   //document.getElementById("MyList").innerHTML = shoppinglist[position];
   var arrays = shoppinglist[position];
   arrays = arrays.split(",");
@@ -172,7 +180,7 @@ function changeShoppinglist(position) {
 }
 
 //v3.1
-function changeShoppingCart(position) {
+function changeShoppingCart(position) { // c
   document.getElementById("MyCart").innerHTML = shoppinglist[position];
   var arrays = addtocart[position];
   arrays = arrays.split(",");
@@ -203,7 +211,7 @@ function addbacktoshoppinglist(item,num) {
 }
 
 //v 3.1 Update function addShoppinglist by adding objects
-function addtoshopcart(item, num) {
+function addtoshopcart(item, num) { // c
     document.getElementById("sharelist").innerHTML = ' ';
     deleteShoppinglists(num);
     addtocart.push(item);
@@ -218,7 +226,7 @@ function addtoshopcart(item, num) {
 }
 
 //v 3.1 Update function addShoppinglist by adding objects
-function addShoppinglist(item) {
+function addShoppinglist(item) { // c
   //v 3.0 declare variable for groc string
   //push to shoppinglist
   if (item != "")
