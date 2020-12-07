@@ -1,13 +1,8 @@
-// Kyin Edwards
-// Spring 2020
-// Web233 Javascript
-// 12/1/2020
-// Week 16
 
+  
 //v3.4 Add popup describing app when visitors load webpage the first time
-window.onload = function() 
-{
-    about(); // describes what the app if used for
+window.onload = function() {
+    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
@@ -17,8 +12,7 @@ window.onload = function()
 //v 4.0 read cookie on load and display
 
 //v4.1 get values via URL
-function get(name) // c
-{
+function get(name){
     var url = window.location.search;
     var num = url.search(name);
     var namel = name.length;
@@ -29,59 +23,38 @@ function get(name) // c
     if(num>=0) return url.substr(0,num);
     if(num<0)  return url;
 }
-//v4.1 ShareList via bitly api
-function passlist() // c
+//ShareList passbyvalues Week 14
+function passlist()
 {
- var url = "https://To-doListDirectTaskManager.github.io/index.html?list="+ shoppinglist; // change .html
-    var accessToken = "eff66075988ab2f610fba18455b493ce90540381";
-    var params = {
-        "long_url" : url           
-    };
-
-    $.ajax({
-        url: "https://api-ssl.bitly.com/v4/shorten",
-        cache: false,
-        dataType: "json",
-        method: "POST",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-        },
-        data: JSON.stringify(params)
-    }).done(function(data) {
-        //alert(data.link);
-         getshorturl = 1;
-         document.getElementById("sharelist").innerHTML = 'Share List:\n' + data.link;
-         copyToClipboard(data.link);
-    }).fail(function(data) {
-        //alert(data.link);
+ var url = "https://rvclist.github.io/rvclist14/index.html?list="+ shoppinglist;
+ //Week 14 add link to sharelist id
       document.getElementById("sharelist").innerHTML = 'Share List:\n' + url;
-      //copyToClipboard("sharelist");
-      copyToClipboard(URL);
-      //alert("ShoppingList URL Copied");
-    });
+ //Copy URL
+      copyToClipboard(url);
 }
 //vFinal share function
-function share() // c
+function share()
 {
    passlist();
 }
-//v4.1 prompt message to copy URL
-function copyToClipboard(text)
-{
-     var passbyurl = document.createElement("textarea");
+//Copy URL Week 14
+function copyToClipboard(text) {
+  var passbyurl = document.createElement("textarea");
   passbyurl.value = text;
   document.body.appendChild(passbyurl);
   passbyurl.focus();
   passbyurl.select();
   document.execCommand("copy");
   document.body.removeChild(passbyurl);
-  alert("URL is now on your clipboard.  Share with a friend: " + text);
+  alert("URL has been copied. Ready to share: " + text);
+  //window.prompt("Copy & Share List!", text);
+    
 }
 
 function about()
 {
-    alert("Welcome to 'To-do List' App! Enter the fields for each event or reminder you would like to add"\n); 
+    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    
 }
 //read cookie and return
 function readCookie(name) {
@@ -96,7 +69,7 @@ function readCookie(name) {
 }
 
 //v. 4.0remove and format cookie
-function remove_unwanted(str) {  // c
+function remove_unwanted(str) {  
     
   if ((str===null) || (str===''))  
        return false;  
@@ -115,11 +88,11 @@ function remove_unwanted(str) {  // c
 //v 4.0 save cookie
 function savecookie()
 {
-  delete_cookie('To-doListDirectTaskManager');
+  delete_cookie('konkollist');
    var date = new Date();
    //keeps for a year
     date.setTime(date.getTime() + Number(365) * 3600 * 1000);
-   document.cookie = 'To-doListDirectTaskManager' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
+   document.cookie = 'konkollist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
 }
 
 
@@ -129,12 +102,12 @@ function delete_cookie(name) {
 }
 
 
-function populateshoppinglistonload() // c
+function populateshoppinglistonload()
 {
   shoppinglist = [];
   addtocart = [];
   //load cookie into array
-  var y = readCookie('To-doListDirectTaskManager');
+  var y = readCookie('konkollist');
   //remove unwanted chars and format
   y = remove_unwanted(y); 
   //spit array by comma %2C
@@ -163,7 +136,7 @@ var shoppinglist = [];
 var addtocart = [];
 
 //v3.1
-function changeShoppinglist(position) { // c
+function changeShoppinglist(position) {
   //document.getElementById("MyList").innerHTML = shoppinglist[position];
   var arrays = shoppinglist[position];
   arrays = arrays.split(",");
@@ -180,7 +153,7 @@ function changeShoppinglist(position) { // c
 }
 
 //v3.1
-function changeShoppingCart(position) { // c
+function changeShoppingCart(position) {
   document.getElementById("MyCart").innerHTML = shoppinglist[position];
   var arrays = addtocart[position];
   arrays = arrays.split(",");
@@ -211,7 +184,7 @@ function addbacktoshoppinglist(item,num) {
 }
 
 //v 3.1 Update function addShoppinglist by adding objects
-function addtoshopcart(item, num) { // c
+function addtoshopcart(item, num) {
     document.getElementById("sharelist").innerHTML = ' ';
     deleteShoppinglists(num);
     addtocart.push(item);
@@ -226,7 +199,7 @@ function addtoshopcart(item, num) { // c
 }
 
 //v 3.1 Update function addShoppinglist by adding objects
-function addShoppinglist(item) { // c
+function addShoppinglist(item) {
   //v 3.0 declare variable for groc string
   //push to shoppinglist
   if (item != "")
@@ -255,20 +228,22 @@ function clearFocus()
 }
 
 
-//v 3.1: update function displayShoppinglists() to add to cart 
+//Update ShoppinhList Week 14
 function displayShoppinglists() {
 document.getElementById("MyList").innerHTML = '';
 var TheList = "";
 var TheRow = "";
+//Get length of arraylist
 var arrayLength = shoppinglist.length;
 for (var i = 0; i < shoppinglist.length; i++) {
   //v 3.1 change button name to btndelete
 var btndelete =  ' <input class="button" id="remove" name="delete" type="button" value="Remove" onclick="deleteShoppinglists(' + i + ')" />';
-var btnupdate =  ' <input class="button" name="edit" type="button" value="Edit Item" onclick="changeShoppinglist(' + i + ')" />';
+//var btnupdate =  ' <input class="button" name="edit" type="button" value="Edit Item" onclick="changeShoppinglist(' + i + ')" />';
 //v 3.1 add edit button using below i index & name it btnpdate
 var arrays = shoppinglist[i];
 arrays = "'"+arrays+"'";
 var btnaddcart =  '<input name="add" type="checkbox" id="adds" value="Add to Shopping Cart" onclick="addtoshopcart('+arrays+','+ i +')" />';
+//Week 14 Add Share Button
 var btnsharelist = '<input class="button" id="shares" name="shares" type="submit" value="Share Shopping List" onclick="share()" />';
 TheRow = '<li>' + shoppinglist[i] + btndelete + ' '  + btnaddcart + '</li>';
 TheList += TheRow;
@@ -277,10 +252,12 @@ TheList += TheRow;
 if (arrayLength > 0)
 {
   document.getElementById("MyList").innerHTML = '<ul>' + TheList + '</ul>';
+//Week 14 Add Share Button if arraylist contains values 
   document.getElementById("sharebutton").innerHTML = btnsharelist;
 }else
 {
   document.getElementById("MyList").innerHTML = ' ';
+//Week 14 Remove Share Button and Sharelist if arraylist contains values 
   document.getElementById("sharebutton").innerHTML = ' ';
     document.getElementById("sharelist").innerHTML = ' ';
 }
@@ -331,3 +308,4 @@ function deleteShoppingCart(position) {
   displayShoppinglists();
   displayShoppingCart();
 }
+
