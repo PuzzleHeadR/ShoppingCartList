@@ -8,8 +8,9 @@
 
   
 //v3.4 Add popup describing app when visitors load webpage the first time
-window.onload = function() {
-    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+window.onload = function() 
+{
+    alert("The To-do List: Direct Task Manager is used to enter tasks and reminders to complete at your own discretion. \n Enter the areas you'd like to assign in the field below. ");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
@@ -19,7 +20,8 @@ window.onload = function() {
 //v 4.0 read cookie on load and display
 
 //v4.1 get values via URL
-function get(name){
+function get(name)
+{
     var url = window.location.search;
     var num = url.search(name);
     var namel = name.length;
@@ -33,11 +35,14 @@ function get(name){
 //ShareList passbyvalues Week 14
 function passlist()
 {
- var url = "https://rvclist.github.io/rvclist14/index.html?list="+ shoppinglist;
+ var url = "https://To-doListDirectTaskManager.github.io/index.html?list="+ shoppinglist;
  //Week 14 add link to sharelist id
-      document.getElementById("sharelist").innerHTML = 'Share List:\n' + url;
+      //important document.getElementById("sharelist").innerHTML = 'Share List:\n' + url;
  //Copy URL
-      copyToClipboard(url);
+      //important copyToClipboard(url);
+   var accessToken = "eff66075988ab2f610fba18455b493ce90540381";
+   var params = {
+        "long_url" : url      
 }
 //vFinal share function
 function share()
@@ -60,8 +65,7 @@ function copyToClipboard(text) {
 
 function about()
 {
-    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
-    
+   // unused alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");   
 }
 //read cookie and return
 function readCookie(name) {
