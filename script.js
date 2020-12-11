@@ -235,7 +235,7 @@ function addShoppinglist(item) {
   savecookie();
   }else
   {
-  alert("Item Description Required: Please enter now :)");
+  alert("Task Description Required. Please assign values less than 19 characters. ");
   clearFocus();
   }
 }
