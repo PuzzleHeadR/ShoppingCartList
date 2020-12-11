@@ -5,8 +5,9 @@
 // Week 16
   
 //v3.4 Add popup describing app when visitors load webpage the first time
-window.onload = function() {
-    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+window.onload = function()
+{
+    alert("Why");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
