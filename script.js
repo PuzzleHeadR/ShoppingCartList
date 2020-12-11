@@ -68,7 +68,7 @@ function share()
 }
 //v4.1 prompt message to copy URL
 function copyToClipboard(text) {
-   window.prompt("Copy & Share List!", text);
+   window.prompt("Use this link to share the List!", text);
 }
 
 function about()
