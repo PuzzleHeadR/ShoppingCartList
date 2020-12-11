@@ -7,7 +7,7 @@
 //v3.4 Add popup describing app when visitors load webpage the first time
 window.onload = function()
 {
-    alert("Welcome to the 'To-do List: Direct Task Manager'.\n\n This applet allows the user to assign tasks and manipulate the tasks when they are complete.\n\n Enter a task in the blank field and click 'Add' to apply a task and delete the task by clicking the 'Remove' button found below. ");
+    alert("Welcome to the 'To-do List: Direct Task Manager'.\n\nThis applet allows the user to assign tasks and manipulate the tasks when they are complete.\n\nEnter a task in the blank field and click 'Add' button to apply a task and delete the task by clicking the 'Remove' button found below. ");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
