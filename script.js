@@ -68,7 +68,7 @@ function share() {
 
 // v4.1 prompt message to copy URL
 function copyToClipboard(text) {
-   window.prompt("Link to github respository: ", text);
+   window.prompt("Shortened bitly link (expired, no longer running): ", text);
 }
 
 function about() {
