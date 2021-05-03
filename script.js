@@ -1,36 +1,35 @@
-// Kyin Edwards
-// Spring 2020
-// Web233 Javascript
-// 12/1/2020
-// Week 16
+/*
+	script.js
+	Date Written: 11/28/2020
+	Created by: Kyin Edwards 
+*/
   
-//v3.4 Add popup describing app when visitors load webpage the first time
-window.onload = function()
-{
-    alert("Welcome to the 'To-do List: Direct Task Manager'!\n\nThis applet allows the user to assign tasks and manipulate the tasks when they are complete.\n\nEnter a task in the blank field and click 'Add' button to apply a task and delete the task by clicking the 'Remove' button found below. ");
+// v3.4 Added popup describing app when visitors load webpage the first time
+window.onload = function() {
+    alert("Welcome to the 'To-do List: Direct Task Manager'!\n\nThis applet allows the user to assign tasks and manipulate the tasks when they are inputed into the field.\n\nEnter a task in the blank field and click 'Add' button to apply a task and delete the task by clicking the 'Remove' button found below. ");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
 };
 
-//v 4.0 save / get array via cookies
-//v 4.0 read cookie on load and display
+// v4.0 save / get array via cookies
+// v4.0 read cookie on load and display
 
-//v4.1 get values via URL
-function get(name){
+// v4.1 get values via URL
+function get(name) {
     var url = window.location.search;
     var num = url.search(name);
     var namel = name.length;
-    var frontlength = namel+num+1; //length of everything before the value
+    var frontlength = namel+num+1;
     var front = url.substring(0, frontlength);
     url = url.replace(front, "");
     num = url.search("&");
     if(num>=0) return url.substr(0,num);
     if(num<0)  return url;
 }
-//v4.1 ShareList via bitly api
-function passlist()
-{
+
+// v4.1 ShareList via bitly api (expired)
+function passlist() {
  var url = "https://To-doListDirectTaskManager.github.io/index.html?list="+ shoppinglist;
     var accessToken = "eff66075988ab2f610fba18455b493ce90540381";
 
@@ -38,7 +37,7 @@ function passlist()
         "long_url" : url           
     };
 
-    $.ajax({
+    $.ajax( {
         url: "https://api-ssl.bitly.com/v4/shorten",
         cache: false,
         dataType: "json",
@@ -49,34 +48,34 @@ function passlist()
         },
         data: JSON.stringify(params)
     }).done(function(data) {
-        //alert(data.link);
+        // alert(data.link);
          getshorturl = 1;
          document.getElementById("sharelist").innerHTML = 'Share List:\n' + data.link;
          copyToClipboard(data.link);
     }).fail(function(data) {
-        //alert(data.link);
+        // alert(data.link);
       document.getElementById("sharelist").innerHTML = 'Share List:\n' + url;
-      //copyToClipboard("sharelist");
+      // copyToClipboard("sharelist");
       copyToClipboard(url);
-      //alert("ShoppingList URL Copied");
+      // alert("ShoppingList URL Copied");
     });
 }
-//vFinal share function
-function share()
-{
+
+// vFinal share function
+function share() {
    passlist();
 }
-//v4.1 prompt message to copy URL
+
+// v4.1 prompt message to copy URL
 function copyToClipboard(text) {
-   window.prompt("Use this link to share the List!", text);
+   window.prompt("Link to github respository: ", text);
 }
 
-function about()
-{
-    alert("Welcome to the 'To-do List: Direct Task Manager'!\n\nThis applet allows the user to assign tasks and manipulate the tasks when they are complete.\n\nEnter a task in the blank field and click 'Add' button to apply a task and delete the task by clicking the 'Remove' button found below. ");
-    
+function about() {
+    alert("Welcome to the 'To-do List: Direct Task Manager'!\n\nThis applet allows the user to assign tasks and manipulate the tasks when they are inputed into the field.\n\nEnter a task in the blank field and click 'Add' button to apply a task and delete the task by clicking the 'Remove' button found below. ");
 }
-//read cookie and return
+
+// read cookie and return
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -88,26 +87,24 @@ function readCookie(name) {
     return null;
 }
 
-//v. 4.0remove and format cookie
+// v.4.0 remove and format cookie
 function remove_unwanted(str) {  
-    
-  if ((str===null) || (str===''))  
-       return false;  
- else  
-   str = str.toString();
-    //clean space
-   str = str.replace(/%20/g, " ");
-    //clean !
-    str = str.replace(/%21/g, "!");
-   str = str.replace(/%24/g, "$"); 
-   str = str.replace(/%7C/g, " | ");
-  return str.replace(/[^\x20-\x7E]/g, '');  
+	if ((str===null) || (str===''))  
+		return false;  
+	else  
+		str = str.toString();
+	
+	   // clean space
+	   str = str.replace(/%20/g, " ");
+	   // clean !
+	   str = str.replace(/%21/g, "!");
+	   str = str.replace(/%24/g, "$"); 
+	   str = str.replace(/%7C/g, " | ");
+	   return str.replace(/[^\x20-\x7E]/g, '');  
 }  
 
-
-//v 4.0 save cookie
-function savecookie()
-{
+// v4.0 save cookie
+function savecookie() {
   delete_cookie('konkollist');
    var date = new Date();
    //keeps for a year
@@ -116,14 +113,12 @@ function savecookie()
 }
 
 
-//v 4.0 delete cookie
+// v4.0 delete cookie
 function delete_cookie(name) {
   document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-
-function populateshoppinglistonload()
-{
+function populateshoppinglistonload() {
   shoppinglist = [];
   addtocart = [];
   //load cookie into array
@@ -144,7 +139,6 @@ function populateshoppinglistonload()
   }
 }
 
-
 var MyItems = {
   name:"",
   price:""
@@ -152,12 +146,12 @@ var MyItems = {
 
 var shoppinglist = [];
 
-//v 3.1 addtocart empty array
+// v3.1 addtocart empty array
 var addtocart = [];
 
-//v3.1
+// v3.1
 function changeShoppinglist(position) {
-  //document.getElementById("MyList").innerHTML = shoppinglist[position];
+  // document.getElementById("MyList").innerHTML = shoppinglist[position];
   var arrays = shoppinglist[position];
   arrays = arrays.split(",");
     var e1 = arrays[0];
@@ -168,11 +162,11 @@ function changeShoppinglist(position) {
   shoppinglist[position] = eitem + "," + '$' + ecost;
   displayShoppinglists();
   displayShoppingCart();
-  //v 4.0 save cookie
+  // v 4.0 save cookie
   savecookie();
 }
 
-//v3.1
+// v3.1
 function changeShoppingCart(position) {
   document.getElementById("MyCart").innerHTML = shoppinglist[position];
   var arrays = addtocart[position];
@@ -189,21 +183,21 @@ function changeShoppingCart(position) {
    savecookie();
 }
 
-//v3.1 
+// v3.1 
 function addbacktoshoppinglist(item,num) {
-  //push to deleteShoppingCar
+  // push to deleteShoppingCar
    deleteShoppingCart(num);
   shoppinglist.push(item);
-  //display shoppinglist
+  // display shoppinglist
   displayShoppinglists();
-//v3.1 display displayShoppingCart() 
+// v3.1 display displayShoppingCart() 
   displayShoppingCart(); 
   clearFocus();
-  //v 4.0 save cookie
+  // v4.0 save cookie
    savecookie();
 }
 
-//v 3.1 Update function addShoppinglist by adding objects
+// v3.1 Update function addShoppinglist by adding objects
 function addtoshopcart(item, num) {
     document.getElementById("sharelist").innerHTML = ' ';
     deleteShoppinglists(num);
@@ -218,20 +212,20 @@ function addtoshopcart(item, num) {
    savecookie();
 }
 
-//v 3.1 Update function addShoppinglist by adding objects
+// v3.1 Update function addShoppinglist by adding objects
 function addShoppinglist(item) {
-  //v 3.0 declare variable for groc string
-  //push to shoppinglist
+  // v3.0 declare variable for groc string
+  // push to shoppinglist
   if (item != "")
   {
   document.getElementById("sharelist").innerHTML = ' ';
   shoppinglist.push(item);
-  //display shoppinglist
+  // display shoppinglist
   displayShoppinglists();
-//v3.1 display displayShoppingCart() 
+// v3.1 display displayShoppingCart() 
   displayShoppingCart(); 
   clearFocus();
-  //v 4.0 save cookie
+  // v 4.0 save cookie
   savecookie();
   }else
   {
@@ -240,22 +234,20 @@ function addShoppinglist(item) {
   }
 }
 
-function clearFocus()
-{
+function clearFocus() {
   document.getElementById("item").value = "";
- //  document.getElementById("cost").value = "";
+ // document.getElementById("cost").value = "";
   document.getElementById("item").focus();
 }
 
-
-//v 3.1: update function displayShoppinglists() to add to cart 
+// v3.1: update function displayShoppinglists() to add to cart 
 function displayShoppinglists() {
 document.getElementById("MyList").innerHTML = '';
 var TheList = "";
 var TheRow = "";
 var arrayLength = shoppinglist.length;
 for (var i = 0; i < shoppinglist.length; i++) {
-  //v 3.1 change button name to btndelete
+  // v 3.1 change button name to btndelete
 var btndelete =  ' <input class="button" id="remove" name="delete" type="button" value="Remove" onclick="deleteShoppinglists(' + i + ')" />';
 var btnupdate =  ' <input class="button" name="edit" type="button" value="Edit Item" onclick="changeShoppinglist(' + i + ')" />';
 //v 3.1 add edit button using below i index & name it btnpdate
@@ -266,20 +258,19 @@ var btnsharelist = '<input class="button" id="shares" name="shares" type="submit
 TheRow = '<li>' + shoppinglist[i] + btndelete + ' '  + btnaddcart + '</li>';
 TheList += TheRow;
 }
-//v3.1 add Title
-if (arrayLength > 0)
-{
+
+// v3.1 add Title
+if (arrayLength > 0) {
   document.getElementById("MyList").innerHTML = '<ul>' + TheList + '</ul>';
   document.getElementById("sharebutton").innerHTML = btnsharelist;
-}else
-{
+}else {
   document.getElementById("MyList").innerHTML = ' ';
   document.getElementById("sharebutton").innerHTML = ' ';
     document.getElementById("sharelist").innerHTML = ' ';
 }
 }
 
-//v3.1
+// v3.1
 function displayShoppingCart() {
 document.getElementById("MyCart").innerHTML = ''
 var TheList = "";
@@ -297,18 +288,17 @@ var btnaddlist =  '<input name="add" type="checkbox" id="adds" value="Add to Sho
 TheRow =  "<li>" + addtocart[i] + btndelete + ' ' +  ' ' + btnaddlist + '</li>';
 TheList += TheRow;
 }
-if (arrayLength > 0)
-{
+if (arrayLength > 0) {
   document.getElementById("labels").innerHTML = 'Finished';
   document.getElementById("MyCart").innerHTML = '<ul>' + TheList + '</ul>';
-}else{
+}else {
   document.getElementById("labels").innerHTML = '';
   document.getElementById("MyCart").innerHTML = '';
     
 }
 }
 
-//v3.1
+// v3.1
 function deleteShoppinglists(position) {
   document.getElementById("sharelist").innerHTML = ' ';
   shoppinglist.splice(position, 1);
@@ -317,7 +307,7 @@ function deleteShoppinglists(position) {
    //v 4.0 save cookie
   savecookie();
 }
-//v3.1
+// v3.1
 function deleteShoppingCart(position) {
   document.getElementById("sharelist").innerHTML = ' ';
   addtocart.splice(position, 1);
